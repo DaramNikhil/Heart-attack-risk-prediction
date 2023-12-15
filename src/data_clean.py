@@ -1,45 +1,33 @@
 import pandas as pd
-import logging
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.compose import ColumnTransformer
+import numpy as np
 from sklearn.impute import SimpleImputer
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
 import os
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
 from save_objects import object_saving
 
-class Configuration:
-    """file location
-    """
+class data_process_config:
+
     data_path = os.path.join(r"D:\my projects\heart_attack_risk_prediction\heart_attack_risk_prediction\artifacts", "transformer.pkl")
 
-def clean_data(df: pd.DataFrame) -> pd.DataFrame:
-
-    """preprocessing the data using simple imputer"""
-    try:
-
-        """remove some
-        unimportent features from the datarame"""
-
-        df = df.drop(["Income","Patient ID","Country","Continent","Hemisphere"], axis=1)
 
 
-        """extracting columns from the dataset"""
 
-        #numaric columns
-        numarics = ['Age', 'Cholesterol', 'Heart Rate', 'Diabetes',
-                     'Family History', 'Smoking', 'Obesity', 
-                     'Alcohol Consumption', 'Exercise Hours Per Week',
-                       'Previous Heart Problems', 'Medication Use',
-                         'Stress Level', 'Sedentary Hours Per Day', 'BMI', 'Triglycerides', 
-                         'Physical Activity Days Per Week', 
-                         'Sleep Hours Per Day']
-        
-        #catagorical columns
-        catagorics = ['Sex', 'Blood Pressure', 'Diet']
+class initialisation_config:
 
-        #numarical pipeline
-        numaric_pipelines = Pipeline(
+    def __init__(self) -> None:
+
+        self.data_process_config = data_process_config()
+
+    def data_transformation(self, train_data, test_data):
+
+        try:
+
+            # pipelines
+
+           # numaric pipelines
+            numaric_pipelines = Pipeline(
 
                 [
                     ("scaler", StandardScaler())
@@ -48,52 +36,71 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
             )
 
             # catagorical pipelies
-        catagorical_pipelines = Pipeline(
+            catagorical_pipelines = Pipeline(
 
                 [
-                    ("ohe", OneHotEncoder()),
+                    ("ohe", OneHotEncoder(handle_unknown="error")),
                     ("scaler", StandardScaler(with_mean=False))
 
                 ])
 
-        transformer = ColumnTransformer([
+            # numaric values
+            numarics = ['Age', 'Cholesterol', 'Heart Rate', 'Diabetes',
+                     'Family History', 'Smoking', 'Obesity', 
+                     'Alcohol Consumption', 'Exercise Hours Per Week',
+                       'Previous Heart Problems', 'Medication Use',
+                         'Stress Level', 'Sedentary Hours Per Day', 'BMI', 'Triglycerides', 
+                         'Physical Activity Days Per Week', 
+                         'Sleep Hours Per Day']
+
+            catagorics = ['Sex', 'Diet']
+
+
+            transformer = ColumnTransformer(
+            transformers=[
 
                 ("numaricals", numaric_pipelines, numarics),
 
                 ("catagoricals", catagorical_pipelines, catagorics)
-            ])
-        
-        """splpit the data into 
-                training and testig"""
-        train_data = df.iloc[:,:-1]
-        test_data = df.iloc[:,-1]
+            ], remainder="passthrough")
 
-        """applying the column transformation"""
+             # test_data
+            """
+            splitting the data into training and testing sets for training 
+            """
+            # train_data_input_feature
+            train_data_input_feature = train_data.iloc[:, :-1]
 
-        transformed_data = transformer.fit_transform(train_data).toarray()
+            # test_data_targer_feature
+            train_data_target_feature = train_data.iloc[:, -1]
 
-        """created a folders to save
-                artifacts
-        """
-        path_obj = Configuration()
-        os.makedirs(os.path.dirname(path_obj.data_path), exist_ok=True)
+            # test_data_input_feature
+            test_data_input_feature = test_data.iloc[:, :-1]
 
-        """save the object in pickle file"""
-          
-        object_saving(
-            transformer, 
-            path_obj.data_path)
+            # test_data_targer_feature
+            test_data_target_feature = test_data.iloc[:, -1]
 
-        return (
-            transformed_data,
-            test_data
-        )
-    
+            train_arr_file = transformer.fit_transform(
+                train_data_input_feature)
 
-    except Exception as e:
-        logging.error("error occuring while running clean data function: {}".format(e))
-        raise e
-    
+            """save the scaling object in the form of pickle file
+            """
 
+            """make a directory for storage purpose
 
-        
+            """
+            os.makedirs(os.path.dirname(self.data_process_config.data_path), exist_ok= True)
+
+            object_saving(transformer, self.data_process_config.data_path)
+
+            test_arr_file = transformer.transform(test_data_input_feature)
+
+            
+            return (
+
+                train_arr_file,
+                test_arr_file,
+            )
+
+        except Exception as e:
+            raise e
