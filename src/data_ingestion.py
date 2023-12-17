@@ -18,9 +18,11 @@ class Init_configuration:
             df = pd.read_csv(self.data_path)
             """remove some
                 unimportent features from the datarame"""
+            df[['Systolic', 'Diastolic']] = df['Blood Pressure'].str.split('/', expand=True).astype(int)
 
             df = df.drop(["Income","Patient ID","Country","Continent","Hemisphere","Blood Pressure"], axis=1)
             return df
+        
 
         except Exception as e:
             logging.error("Configuration error : {}".format(e))
@@ -32,7 +34,7 @@ def process_post(data_path):
 
     config_obj = Init_configuration(data_path)
     df = config_obj.config_path()
-    train_data, test_data = train_test_split(df, test_size=0.2, random_state= 1)
+    train_data, test_data = train_test_split(df, test_size=0.3, random_state=1)
     return (
         train_data,
         test_data

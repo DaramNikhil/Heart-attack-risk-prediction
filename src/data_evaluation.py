@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegression, LinearRegression
 import logging
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
@@ -30,11 +30,13 @@ class Data_Evaluation_fig:
             """model traning and hyper parameter tuning
         """
             
-            algorithms_ = {'RandomForestClassifier': RandomForestClassifier(),
+            algorithms_ = {'LogisticRegression': LogisticRegression(),
                            "SVC": SVC(),
                            "GaussianNB": GaussianNB(),
                            "KNN": KNeighborsClassifier(n_neighbors=5),
                            "DecisionTreeClassifier": DecisionTreeClassifier(),
+                           "RandomForestClassifier": RandomForestClassifier(n_estimators=5)
+
 
                            }
 
@@ -62,6 +64,7 @@ class Data_Evaluation_fig:
                                            "min_samples_leaf": [1, 2, 4]
                                            },
 
+                "LogisticRegression":{},
                 "SVC": {"C": [0.1, 1, 10, 100, 1000],
                         "kernel": ["rbf", "linear"],
                         "gamma": [1, 0.1, 0.01, 0.001, 0.0001]
@@ -77,8 +80,7 @@ class Data_Evaluation_fig:
 
                 "KNN": {
 
-                },
-
+                }
                 
             }
 

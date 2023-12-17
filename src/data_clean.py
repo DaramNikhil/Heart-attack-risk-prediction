@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.preprocessing import StandardScaler, OneHotEncoder, LabelEncoder
 import os
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
@@ -39,7 +39,7 @@ class initialisation_config:
             catagorical_pipelines = Pipeline(
 
                 [
-                    ("ohe", OneHotEncoder(handle_unknown="error")),
+                    ("lec", OneHotEncoder(handle_unknown="ignore")),
                     ("scaler", StandardScaler(with_mean=False))
 
                 ])

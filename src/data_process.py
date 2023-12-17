@@ -21,7 +21,7 @@ def data_processing(data_path: str) ->pd.DataFrame:
         print("train_arr test_arr getting done....")
         best_model_score = Data_Evaluation_fig(train_arr, test_arr).data_clean()
         print("finded the best model score.....")
-        print(best_model_score)
+        print("best model score:", best_model_score)
         
         
                
