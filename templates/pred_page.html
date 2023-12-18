@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200vh;
+            background-color: #ff5e62;
+        }
+        .prediction-form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0px 10px 10px -10px rgba(0, 0, 0, 0.5);
+        }
+        .prediction-form input[type="number"] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+        }
+        .prediction-form input[type="text"] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid #d3cfcf;
+            border-radius: 4px;
+        }
+        .prediction-form input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .prediction-form input[type=checkbox] {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .prediction-form input[type=checkbox] { 
+            visibility: visible;
+            width: 20px;; 
+        }
+        .diabetes{ 
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+        }
+        .family_history{
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .smoking{ 
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+        }
+        .obesity{ 
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+        }
+        .alchohol{ 
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+        }
+        .heartproblem{
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;  
+        }
+        .medicationuse{
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;             
+        } 
+    </style>
+</head>
+<body>
+    <div class="prediction-form">
+            <h1>Prediction Form</h1>
+            <form action="#" method="post">
+                <input type="number" name="age" placeholder="Age" min="18" max="90">
+                <select name="sex" class="diabetes">
+                    <option value="" selected>Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+                <br>
+                <input type="number" name="cholesterol" min="100" max="400" placeholder="Enter your Cholesterol level">
+                <br>
+                <input type="number" name="heartrate" placeholder="Heart Rate" min="40" max="130">
+                <br>
+                <select name="diabetes" class="diabetes">
+                    <option value="" selected>Diabetes</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+                <br>
+                <select name="family_history" class="family_history">
+                    <option value="" selected>Heart Diseases in your Family history</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+                <select name="smoking" class="smoking">
+                    <option value="" selected>Smoking</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+                <select name="obesity" class="obesity">
+                    <option value="" selected>Obesity</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+                <select name="alchohol" class="alchohol">
+                    <option value="" selected>Alcohol Consumption</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+                <input type="number" name="exercisehoursperweek" placeholder="Exercise Hours Per Week" min="0" max="19">
+                <select name="heart_problem" class="heartproblem">
+                    <option value="" selected>Previous Heart Problems</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+                <select name="medicationuse" class="medicationuse">
+                    <option value="" selected>Medication Use</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+                <input type="number" name="stresslevel" placeholder="Stress Lavel" min="0" max="10">
+                <input type="number" name="sadentory" placeholder="Sedentary Hours Per Day" min="0" max="12">
+                <input type="number" name="bmi" placeholder="BMI" min="0" max="40">
+                <input type="number" name="bmi" placeholder="Triglycerides" min="0" max="400">
+                <input type="number" name="pactivity" placeholder="Physical Activity Days Per Week" min="0" max="400">
+                <input type="number" name="sleep" placeholder="Sleep Hours Per Day" min="0" max="400">
+                
+                
+                <input type="submit" value="submit">
+                <p class="result" id="result"></p>
+            </form>
+    </div>
+</body>
+</html>
