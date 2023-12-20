@@ -1,8 +1,0 @@
-pip
-Flask
-imblearn
-numpy
-pandas
-scikit_learn
-setuptools
-xgboost
