@@ -9,7 +9,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 200vh;
+            height: 230vh;
             background-color: #ff5e62;
         }
         .prediction-form {
@@ -36,6 +36,15 @@
         }
         .prediction-form input[type=submit] {
             background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+           cursor: pointer;
+        }
+        .prediction-form input[type=reset] {
+        background-color: #241a7e;
             color: white;
             padding: 14px 20px;
             margin: 8px 0;
@@ -170,12 +179,22 @@
                 <input type="number" name="stresslevel" placeholder="Stress Lavel" min="0" max="10">
                 <input type="number" name="sadentory" placeholder="Sedentary Hours Per Day" min="0" max="12">
                 <input type="number" name="bmi" placeholder="BMI" min="0" max="40">
-                <input type="number" name="bmi" placeholder="Triglycerides" min="0" max="400">
-                <input type="number" name="pactivity" placeholder="Physical Activity Days Per Week" min="0" max="400">
-                <input type="number" name="sleep" placeholder="Sleep Hours Per Day" min="0" max="400">
+                <input type="number" name="triglycerides" placeholder="Triglycerides" min="0" max="400">
+                <input type="number" name="pactivity" placeholder="Physical Activity Days Per Week" min="0" max="9">
+                <input type="number" name="sleep" placeholder="Sleep Hours Per Day" min="0" max="10">
                 
+                <div class="form-group">
+                    {%if predictions==0%}
+                        <h1>Your Doing Good</h1>
+                    {%else %}
+                        <h1>Your helth is not good</h1>
+                    {%endif %}
+                </div>
                 
-                <input type="submit" value="submit">
+
+                <input type="Submit" value="submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
+                <input type = "reset" value="CLEAR">
+
                 <p class="result" id="result"></p>
             </form>
     </div>

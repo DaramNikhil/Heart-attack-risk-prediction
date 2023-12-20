@@ -50,10 +50,9 @@ class initialisation_config:
                      'Alcohol Consumption', 'Exercise Hours Per Week',
                        'Previous Heart Problems', 'Medication Use',
                          'Stress Level', 'Sedentary Hours Per Day', 'BMI', 'Triglycerides', 
-                         'Physical Activity Days Per Week', 
-                         'Sleep Hours Per Day']
+                         'Physical Activity Days Per Week','Sleep Hours Per Day']
 
-            catagorics = ['Sex', 'Diet']
+            catagorics = ['Sex']
 
 
             transformer = ColumnTransformer(
@@ -68,17 +67,18 @@ class initialisation_config:
             """
             splitting the data into training and testing sets for training 
             """
+            
             # train_data_input_feature
-            train_data_input_feature = train_data.iloc[:, :-1]
-
+            train_data_input_feature = train_data.drop("Heart Attack Risk", axis=1)
+            
             # test_data_targer_feature
-            train_data_target_feature = train_data.iloc[:, -1]
-
+            train_data_target_feature = train_data["Heart Attack Risk"].values
+            
             # test_data_input_feature
-            test_data_input_feature = test_data.iloc[:, :-1]
+            test_data_input_feature = test_data.drop("Heart Attack Risk", axis=1)
 
             # test_data_targer_feature
-            test_data_target_feature = test_data.iloc[:, -1]
+            test_data_target_feature = test_data["Heart Attack Risk"].values
 
             train_arr_file = transformer.fit_transform(
                 train_data_input_feature)
@@ -95,11 +95,16 @@ class initialisation_config:
 
             test_arr_file = transformer.transform(test_data_input_feature)
 
+            train_arr_transform = np.c_[train_arr_file, np.array(train_data_target_feature)]
+        
+            test_arr_transform = np.c_[test_arr_file, np.array(test_data_target_feature)]
+
+
             
             return (
 
-                train_arr_file,
-                test_arr_file,
+                train_arr_transform,
+                test_arr_transform,
             )
 
         except Exception as e:

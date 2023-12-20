@@ -18,10 +18,14 @@ class Init_configuration:
             df = pd.read_csv(self.data_path)
             """remove some
                 unimportent features from the datarame"""
-            df[['Systolic', 'Diastolic']] = df['Blood Pressure'].str.split('/', expand=True).astype(int)
-
-            df = df.drop(["Income","Patient ID","Country","Continent","Hemisphere","Blood Pressure"], axis=1)
+            
+            df.drop("Blood Pressure", axis=1, inplace=True)
+            #df["Heart Attack Risk"] = df['Heart Attack Risk'].astype(int)
+            df = df.drop(["Income","Patient ID","Country","Continent","Hemisphere","Diet"], axis=1)
+            
+            
             return df
+            
         
 
         except Exception as e:

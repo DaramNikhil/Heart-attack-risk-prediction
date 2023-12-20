@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression, LinearRegression
+from sklearn.linear_model import LogisticRegression
 import logging
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
@@ -31,11 +31,13 @@ class Data_Evaluation_fig:
         """
             
             algorithms_ = {'LogisticRegression': LogisticRegression(),
-                           "SVC": SVC(),
+                           "RandomForestClassifier": RandomForestClassifier(n_estimators=5),
+                           "DecisionTreeClassifier": DecisionTreeClassifier(),
                            "GaussianNB": GaussianNB(),
                            "KNN": KNeighborsClassifier(n_neighbors=5),
-                           "DecisionTreeClassifier": DecisionTreeClassifier(),
-                           "RandomForestClassifier": RandomForestClassifier(n_estimators=5)
+                           "SVC":SVC(),
+                           "XGBClassifier": XGBClassifier()
+                           
 
 
                            }
@@ -48,7 +50,6 @@ class Data_Evaluation_fig:
             test_arr_input = self.test_arr[:, :-1]
             test_arr_target = self.test_arr[:, -1]
 
-
             #data path location
             data_path = os.path.join(r"D:\my projects\heart_attack_risk_prediction\heart_attack_risk_prediction\artifacts", "pred_obj.pkl")
 
@@ -57,32 +58,21 @@ class Data_Evaluation_fig:
             """
             hyper parameter tuning parameters"""
             parameters = {
-                "RandomForestClassifier": {"max_depth": [2, 3, 5, 10, 20],
-                                           "criterion": ["gini", "entropy"],
-                                           "max_features": ["sqrt", "log2"],
-                                           "min_samples_split": [2, 5, 10],
-                                           "min_samples_leaf": [1, 2, 4]
-                                           },
+                
 
                 "LogisticRegression":{},
-                "SVC": {"C": [0.1, 1, 10, 100, 1000],
-                        "kernel": ["rbf", "linear"],
-                        "gamma": [1, 0.1, 0.01, 0.001, 0.0001]
-                        },
-
-                "GaussianNB": {
-                },
-
-
-                "DecisionTreeClassifier": {"min_samples_split": [2, 5, 10],
-                                           "min_samples_leaf": [1, 2, 4]
-                                           },
-
-                "KNN": {
-
+                "RandomForestClassifier": {"min_samples_split": [2, 5, 10],
+                                           "min_samples_leaf": [1, 2, 4],
+                                           "max_features": ["sqrt", "log2"]},
+                "DecisionTreeClassifier": {"min_samples_leaf": [1, 2, 4],
+                                           "min_samples_split": [2, 5, 10]},
+                "GaussianNB": {},
+                "KNN": {},
+                "SVC": {"kernel": ["rbf", "linear"]},
+                "XGBClassifier": {}
                 }
                 
-            }
+                
 
             """
                 apply the algorithm and gridsearch to the model and return the result as a dictionary"""
