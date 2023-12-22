@@ -1,6 +1,6 @@
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, url_for, redirect
 import pandas as pd
 from save_objects import file_read, model_func
 
@@ -9,7 +9,7 @@ app = Flask(__name__, template_folder="templates")
 @app.route("/", methods=["POST", "GET"])
 def home():
     if request.method == "GET":
-        return render_template('pred_page.html')        
+        return render_template('pred_page.html')
     else:
         """data collection and transformation
         """
@@ -64,7 +64,8 @@ def home():
         
         predictions = model_func(model_path, df2)
 
-        return render_template('pred_page.html',predictions=predictions[0])
+        return render_template("pred_page.html", predictions=predictions[0])
+        
         
         
         
