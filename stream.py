@@ -109,8 +109,7 @@ with st.container():
 
 
                 with st.container():
-                    st.markdown("####")
-                    st.markdown("####")
+                    st.markdown("###")
                     st.markdown("#####")
                     st.markdown("####")
                     st.markdown("##### Thanks for visiting!  \nCreated with ❤ by {}".format(Name))
