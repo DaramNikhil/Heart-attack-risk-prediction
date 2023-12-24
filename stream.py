@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import pickle
 import streamlit.components.v1 as components
-
 #file_paths
 scale_file_path = r"artifacts/transformer.pkl"
 pred_file_path = r"artifacts/pred_obj.pkl"
@@ -23,7 +22,7 @@ st.markdown("""
     “Leveraging advanced algorithms for early detection of heart attack risks. Stay informed, stay healthy.”
 """)
 
-# Input features
+# Input featuresR
 with st.container():
 
     Name = st.text_input('Enter your name')
@@ -36,7 +35,7 @@ with st.container():
     smoking = st.selectbox('Do you have smoking habbit?', ['Yes', 'No'])
     obesity = st.selectbox('Obesity', ['Yes', 'No'])
     alchohol = st.selectbox('Do you take alchohol?', ['Yes', 'No'])
-    diabetes = st.selectbox('Do you have dabetes?', ['Yes', 'No'])
+    diabetes = st.selectbox('Do you have diabetes?', ['Yes', 'No'])
     excersice_hours_per_week = st.slider('Execersice hours per week?', 0, 5, 19)
     st.write("I'm doing ", excersice_hours_per_week, 'hours per week')
     Previous_Heart_Problems = st.selectbox('Previous heart problem?', ['Yes', 'No'])
@@ -110,6 +109,8 @@ with st.container():
 
 
                 with st.container():
+                    st.markdown("####")
+                    st.markdown("####")
                     st.markdown("#####")
                     st.markdown("####")
                     st.markdown("##### Thanks for visiting!  \nCreated with ❤ by {}".format(Name))
