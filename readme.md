@@ -44,7 +44,6 @@
     - [🧪 Tests](#-tests)
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
-- [👏 Acknowledgments](#-acknowledgments)
 
 ---
 
